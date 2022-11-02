@@ -120,17 +120,17 @@ struct MailAccount *findMailAccountByEmail(struct MailServer *mailServer, char *
 
 
 // Global Variables
-        struct MailServer *mailServerList[MAX_SERVERS];
-        int currentMailServerCount = 0;
+struct MailServer *mailServerList[MAX_SERVERS];
+int currentMailServerCount = 0;
 
-        struct MailGroup *mailGroupList[MAX_MAIL_GROUPS_PER_SERVER];
-        int currentMailGroupCount = 0;
+struct MailGroup *mailGroupList[MAX_MAIL_GROUPS_PER_SERVER];
+int currentMailGroupCount = 0;
 
-        struct MailServer *currentMailServer;
+struct MailServer *currentMailServer;
 
 
 // Main Function
-        int main() {
+int main() {
     mainMenu();
     return 0;
 }
@@ -303,6 +303,7 @@ void mainMenu() {
                 printf("Enter your choice: ");
                 scanf("%s", domain_choice);
                 currentMailServer = findMailServerByDomain(domain_choice);
+                mailServerMenu();
             }
                 break;
             case 3:
