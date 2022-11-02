@@ -46,14 +46,8 @@ cmake_ninja_workdir = /Users/anshpatel/CLionProjects/MailServer/cmake-build-debu
 
 build cmake_object_order_depends_target_MailServer: phony || CMakeFiles/MailServer.dir
 
-build CMakeFiles/MailServer.dir/main.c.o: C_COMPILER__MailServer_Debug /Users/anshpatel/CLionProjects/MailServer/main.c || cmake_object_order_depends_target_MailServer
-  DEP_FILE = CMakeFiles/MailServer.dir/main.c.o.d
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
-  OBJECT_DIR = CMakeFiles/MailServer.dir
-  OBJECT_FILE_DIR = CMakeFiles/MailServer.dir
-
-build CMakeFiles/MailServer.dir/server.c.o: C_COMPILER__MailServer_Debug /Users/anshpatel/CLionProjects/MailServer/server.c || cmake_object_order_depends_target_MailServer
-  DEP_FILE = CMakeFiles/MailServer.dir/server.c.o.d
+build CMakeFiles/MailServer.dir/project.c.o: C_COMPILER__MailServer_Debug /Users/anshpatel/CLionProjects/MailServer/project.c || cmake_object_order_depends_target_MailServer
+  DEP_FILE = CMakeFiles/MailServer.dir/project.c.o.d
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu99
   OBJECT_DIR = CMakeFiles/MailServer.dir
   OBJECT_FILE_DIR = CMakeFiles/MailServer.dir
@@ -66,7 +60,7 @@ build CMakeFiles/MailServer.dir/server.c.o: C_COMPILER__MailServer_Debug /Users/
 #############################################
 # Link the executable MailServer
 
-build MailServer: C_EXECUTABLE_LINKER__MailServer_Debug CMakeFiles/MailServer.dir/main.c.o CMakeFiles/MailServer.dir/server.c.o
+build MailServer: C_EXECUTABLE_LINKER__MailServer_Debug CMakeFiles/MailServer.dir/project.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/MailServer.dir
   POST_BUILD = :

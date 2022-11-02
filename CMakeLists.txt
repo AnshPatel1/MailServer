@@ -3,4 +3,4 @@ project(MailServer C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(MailServer main.c server.c)
+add_executable(MailServer project.c)
