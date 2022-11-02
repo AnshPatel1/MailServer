@@ -58,7 +58,7 @@ struct MailTreeNode {
 // FUNCTION SIGNATURES
 struct MailServer *createMailServer(char *domain);
 
-struct MailGroup *createMailGroup(char *name);
+struct MailGroup *createMailGroup(char *name, struct MailServer server);
 
 struct Mail *createMail(char *from, char *to, char *subject, char *body);
 
@@ -149,12 +149,12 @@ struct MailServer *createMailServer(char *domain) {
     return mailServer;
 }
 
-struct MailGroup *createMailGroup(char *name) {
+struct MailGroup *createMailGroup(char *name, struct MailServer server) {
     struct MailGroup *mailGroup = (struct MailGroup *) malloc(sizeof(struct MailGroup));
     mailGroup->name = name;
     mailGroup->root = createMailTreeNode(NULL, NULL, 0);
     mailGroupList[currentMailGroupCount++] = mailGroup;
-    addMailGroupToMailServer(currentMailServer, mailGroup);
+    addMailGroupToMailServer(&server, mailGroup);
     return mailGroup;
 }
 
@@ -265,6 +265,16 @@ struct MailServer *findMailServerByDomain(char *domain) {
 }
 
 
+void sendMail(struct Mail *mail) {
+    struct MailAccount *mailAccount = findMailAccountByEmail(currentMailServer, mail->to);
+    if (mailAccount == NULL) {
+        printf("Mail Account not found\n");
+        return;
+    } else {
+        mailAccount->inbox[mailAccount->currentMailCount++] = mail;
+    }
+}
+
 // MENU FUNCTIONS DEFINITIONS
 
 void mainMenu() {
@@ -339,7 +349,7 @@ void mailServerMenu() {
                 char name[100];
                 printf("Enter name: ");
                 scanf("%s", name);
-                mailGroupList[currentMailGroupCount++] = createMailGroup(name);
+                mailGroupList[currentMailGroupCount++] = createMailGroup(name, *currentMailServer);
             }
                 break;
             case 3: {
@@ -378,8 +388,8 @@ void mailServerMenu() {
                 char mailGroup[100];
                 printf("Enter mail group name: ");
                 scanf("%s", mailGroup);
-                struct MailGroup *mailGroupToAdd = findMailGroupByName(currentMailServer, mailGroup);
-                addMailGroupToMailServer(currentMailServer, mailGroupToAdd);
+                struct MailGroup mailGroupToAdd = findMailGroupByName(currentMailServer, mailGroup);
+                addMailGroupToMailServer(currentMailServer, &mailGroupToAdd);
             }
                 break;
             case 7: {
